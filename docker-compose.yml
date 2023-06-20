@@ -1,53 +1,15 @@
 version: "2"
 services:
-  nodeapp01:
-    image: techwithnc/nodejs:1.0
-    ports:
-      - 3000:3000
-    networks:
-      net01:
-        ipv4_address: "192.168.66.101"
-    volumes:
-      - vol01:/home/dir01
-  busybox01:
-    image: techwithnc/busybox:2.0
-    networks:
-      net01:
-        ipv4_address: "192.168.66.102"
-    volumes:
-      - vol02:/home/dir01
   nginx01:
-    image: techwithnc/nginx:3.0
-    restart: always
-    environment:
-      ENV01: nginx_env01
-      ENV02: nginx_env02
+    image: techwithnc/nginx:4.0
     ports:
       - 80:80
     networks:
       net01:
-        ipv4_address: "192.168.66.103"
-    volumes:
-      - vol03:/home/dir01
-  sleeper:
-    image: techwithnc/sleeper:1.0
-    restart: always
-    environment:
-      ENV01: slp_env01
-      ENV02: slp_env02
-    networks:
-      net01:
-        ipv4_address: "192.168.66.104"
-    volumes:
-      - vol04:/home/dir01
+        ipv4_address: "192.168.66.101"
 networks:
   net01:
     ipam:
       driver: default
       config:
         - subnet: "192.168.66.0/24"
-volumes:
-  vol01:
-  vol02:
-  vol03:
-  vol04:

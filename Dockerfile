@@ -1,2 +1,2 @@
-FROM nginx:1.25
-COPY index.html /usr/share/nginx/html/
+FROM techwithnc/busybox:1.0
+CMD ["sleep", "10000000"]
