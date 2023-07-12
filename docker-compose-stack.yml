@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  svc01:
+    image: techwithnc/nginx:2.0
+    ports:
+      - 80:80
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 3
+      # placement:
+      #   constraints:
+      #     - node.role == worker
+  svc02:
+    image: techwithnc/nodejs:2.0
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.labels.hostname == node4
+  svc03:
+    image: techwithnc/sleeper:1.0
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.labels.hostname == node3
+networks:
+  mynetwork:
+    driver: overlay
+    driver_opts:
+      subnet: 192.168.100.0/24
